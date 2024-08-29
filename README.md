@@ -10,14 +10,21 @@ The current version still can be upgraded for efficiency and flexibility. I did 
 to upgrade the code.
 
 ## For users
+
+#### Recommended but not necessary 
+mvme (mesytec VME data acquisition: https://www.mesytec.com/downloads/mvme.html ). Control software of the VME module used for data acquisition y can be used to replay the individual runs and check the generated histograms are correct.
+
+### Mandatory 
+You need **RootCERN (https://root.cern/install/) and >=Python 3.11.5 version**. 
+
 ### Code Structure
-You need **RootCERN and >=Python 3.11.5 version**. The code is fully self-contained and aside from the requirements should be able to run on its own, the folders are organized the following way:
-* Include: ModuleFather.h (Virtual class gives structure to daughter classes used to read).
+The code is fully self-contained and aside from the requirements should be able to run on its own, the folders are organized the following way:
+* Include-> ModuleFather.h (Virtual class gives structure to daughter classes used to read).
 * Src-> Daughter classes, the modules that are currently implemented are Caen785, Caen785N, Caen1190a, MADC32, MDPP16, MDPP32, VMMR8.
 * Zip-> Files to analyze.
 * Root-> Store for outputs.
 
-### How to run it
+### How to execute the code
 If the user just wants to unpack the data follow these steps:
 
 **NOTE: All files are stored in the Zip folder and the code looks in this folder, this is to make the code self-contained, if the user desires to modify it just change the path in Run_unpack.sh**
@@ -50,7 +57,7 @@ The order in which the modules send the info is always the same (module number s
 ### Objectives for the unpacker
 
 The code needs to locate all F3 and transcribe the information in each F5. The information in the F5 is unique to the module type-> The code needs to know the module structure to unpack. 
-Also, each model needs unique unpacking functions. The code must be flexible enough to take many different configuration, the code is already tested with a lot of different files and it runs correctly. 
+Also, each model needs unique unpacking functions. The code must be flexible enough to take many different configurations, the code is already tested with multiple files and it runs correctly. 
 
 ### How it works
 The code uses sequentially three programs to Unpack
