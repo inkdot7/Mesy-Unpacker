@@ -1,0 +1,14 @@
+# Editor temporary files.
+*~
+*.swp
+\#*\#
+
+# Data directories
+Root/
+Zip/
+
+# Control files
+FileList.txt
+
+# Executables
+Unpack_mvme.out
