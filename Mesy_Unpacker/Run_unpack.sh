@@ -3,7 +3,7 @@
 # Simple bash script to run the IS690 unpacker
 # 1-> Reads one by one the names of the files set in: FileList.tx
 # 2-> For each name searches for the file in the zip folder.
-# 3-> Un zips the selcted file 
+# 3-> Un zips the selected file 
 # 4-> Uses the Interpreter.py script to create a configuration file from the .mvlclst (mesytech file)
 # 5-> Uses the Unpacker and the configuration file to translate .mvlclst to .root (mesytech file)
 # 6-> Save .root and clear the redundant files
