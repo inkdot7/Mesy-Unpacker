@@ -201,7 +201,7 @@ if __name__ == "__main__":
         print("Usage: python script.py <file_path> <output_file>")
     else:
         # Get the file path and names for the output, module list and executable
-        mlvclst_path   = sys.argv[1] # Mesytech file
+        mlvclst_path   = sys.argv[1] # Mesytec file
         config_file    = sys.argv[2] # Config file
         RootFile_path  = sys.argv[3] # Output file
         cpp_executable_path = "./Unpack_mvme.out"  # Replace with the actual path
