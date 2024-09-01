@@ -60,7 +60,7 @@ int counterEvent1=0;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Code strcutre:                                                                                                       //
+// Code structure:                                                                                                       //
 //  Part I: Classes used to read the file (specific unpacking routines for each module can be found in the src folder). //
 //  Part II: The main read routine that initializes the objects and calls the reading methods described in Part I.      //
 //                                                                                                                      //
@@ -105,7 +105,7 @@ vector<string> readTxt(ifstream *file){
 }
 
 // Function to create the TDirectorys for all detected events-------------------------------------------------------------------------------------------------------
-// It is necessary to save them in a list and return the dirs so that data form each detector can later be placed inside an apropiate folder. 
+// It is necessary to save them in a list and return the dirs so that data form each detector can later be placed inside an appropriate folder. 
 // Position 0 corresponds to the folder of Event 0, position 1 to Event 1, and so on...
 // Since each module knows which event it is associated with, it knows which position in the vector to look at to find the folder where it should be placed
 // (all this is done in the histoLoop function)
@@ -121,14 +121,14 @@ std::vector<TDirectory*> createEventsFolder(TFile *treeFile,int numEvents){
 
 }
 
-// Funtion to jump a useless frame----------------------------------------------------------------------------------------------------------------------------------
-// As explained not all frames contain usefull info, threfore we must have a funtion to ingnore ("ie jump") frames.
-// The header of a frame cointains information of its lenght [ie how many bytes are bteween the First byte (FX) of the frame and the next] 
+// Function to jump a useless frame----------------------------------------------------------------------------------------------------------------------------------
+// As explained not all frames contain useful info, threfore we must have a function to ignore ("ie jump") frames.
+// The header of a frame contains information of its length [ie how many bytes are bteween the First byte (FX) of the frame and the next] 
 // This information in the final 13 bits of the headers.
-// This funtion gets the lenght of a frmae and moves the next frame
+// This function gets the length of a frmae and moves the next frame
 void jumpFrame(ifstream *f, unsigned char frame_header[4],ULong_t &bytes_counter) 
 {
-  // Extract 13 bit number form the last two Bytes (the code is read in littel endiang)  
+  // Extract 13 bit number form the last two Bytes (the code is read in little endiang)  
   int words_length = (frame_header[0] + (frame_header[1] << 8) ) & 0b0001111111111111;
 //   cout << "Words to jump " << words_length << endl;
   if (words_length != 0) {
@@ -137,11 +137,11 @@ void jumpFrame(ifstream *f, unsigned char frame_header[4],ULong_t &bytes_counter
   bytes_counter += (words_length * 4);
 }
 
-// Funtion to decrypt a frame----------------------------------------------------------------------------------------------------------------------------------
+// Function to decrypt a frame----------------------------------------------------------------------------------------------------------------------------------
 // This function identifies if the frame is good or not (F3,F5 or F9).
 // If it is not we call the jump frame method
 // If it is good we unpack it.
-// Thanks to the config file the code knows wich methods to call
+// Thanks to the config file the code knows which methods to call
 
 void readFrame(ifstream *f,ULong_t &bytes_counter, Int_t &DATAFRAME_marker, Int_t &EOF_MARKER,ULong_t &totalEvents,Int_t &continue_frame_counter,TTree *EventTree, TFile *treeFile,vector<ModuleFather*>& array,Int_t &broken_event_count) 
 {
@@ -189,9 +189,9 @@ void readFrame(ifstream *f,ULong_t &bytes_counter, Int_t &DATAFRAME_marker, Int_
             counterEvent0++;
             
             // Every F3 contains the F5 of the modules that are sending info.
-            // The order in wich the modules send information (ie the order of the F5) is always the same (set by user when seting UP the DAQ)
+            // The order in which the modules send information (ie the order of the F5) is always the same (set by user when setting UP the DAQ)
             // The order of the modules is extracted from the FA frames by interpreter.py
-            // Using the config file we have created a an array tha aplies the reading funtion in the correct order. 
+            // Using the config file we have created a an array that aplies the reading function in the correct order. 
             for (Int_t i = 0; i < array.size(); i++) {
                 // Call the Read method from the array (the read method is module-specific)
                 array[i]->initEvent();
@@ -239,7 +239,7 @@ void readFrame(ifstream *f,ULong_t &bytes_counter, Int_t &DATAFRAME_marker, Int_
     }
 }
 //////////////////////////////////////////////////////////////////////////////
-//   Part II: Main part, read the config file, and call apropiate methods   //
+//   Part II: Main part, read the config file, and call appropriate methods   //
 //////////////////////////////////////////////////////////////////////////////
 
 int main(int argc, char* argv[]) {
@@ -249,7 +249,7 @@ int main(int argc, char* argv[]) {
     string mvlclstFile = argv[2];
     string output_file = argv[3];
     
-    // Varibales to read the binary
+    // Variables to read the binary
     Int_t broken_event_count=0;
     Int_t DATAFRAME_marker = 0;
     Int_t EOF_MARKER=0;
@@ -258,7 +258,7 @@ int main(int argc, char* argv[]) {
     ULong_t totalEvents = 0;
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Use the module list to initialise objects of the appropiate daughter class
+    // Use the module list to initialise objects of the appropriate daughter class
     ///////////////////////////////////////////////////////////////////////////////
     
     std::ifstream modules_events_structure(map_file);
@@ -266,13 +266,13 @@ int main(int argc, char* argv[]) {
     const int file_size = module_events_vector.size();//Creo que se puede borrar, ya no se usa
 
     // Vector de la clase padre abstracta de los módulos, nos permitará aplicar polimorfia
-    // Vector of the N-modules lenght of instances of the virutal class module fahter that contains the method hiereachy
+    // Vector of the N-modules length of instances of the virtual class module fahter that contains the method hiereachy
     // The specific method are initlalized from the daugheter clases using the config file
     std::vector<ModuleFather*> arrayTest;
 
     bool found = false; //Creo que se puede borrar
     
-    // Counter fot the numbe of modules of each type, use to build folders, histogrmas and distiughs modules of same type
+    // Counter for the numbe of modules of each type, use to build folders, histogrmas and distiughs modules of same type
     int counter_MDPP16=0;
     int counter_MDPP32=0;
     int counter_MADC32=0;
@@ -282,7 +282,7 @@ int main(int argc, char* argv[]) {
     int counter_mvlc_event_stamper=0;
     int eventCounter=0;
     
-    //Read the config file and for each module initialise a objetc of the apropiate class in the correct position
+    //Read the config file and for each module initialise a object of the appropriate class in the correct position
     for (size_t i = 0; i < module_events_vector.size(); i+=3) {
     
        
@@ -347,10 +347,10 @@ int main(int argc, char* argv[]) {
    std::vector<TDirectory*> refereciasFolders=createEventsFolder(treeFileU,eventCounter); 
    
     
-    // Create the branches and histos for each module  in the correct order by calling the specfic method through the apropiate obejct
+    // Create the branches and histos for each module  in the correct order by calling the specific method through the appropriate object
     for (size_t i = 0; i < arrayTest.size(); i++) {
         arrayTest[i]->createTree(EventTreeU);
-        arrayTest[i]->histoLOOP(treeFileU,refereciasFolders); //La funcion histoLoop ahora recibe el vector de los TDirectory de los eventos
+        arrayTest[i]->histoLOOP(treeFileU,refereciasFolders); //La function histoLoop ahora recibe el vector de los TDirectory de los eventos
     }
     
     ///////////////////////////////////////////////////////////////////
@@ -376,7 +376,7 @@ int main(int argc, char* argv[]) {
     bytes_counter += 8;
 
      cout << dontcare<< endl;
-    // Use the readFame funtion to unapck
+    // Use the readFame function to unapck
     arrayTest[0]->EvTree=EventTreeU;
     while (EOF_MARKER == 0) {
     readFrame(&fp,bytes_counter,DATAFRAME_marker,EOF_MARKER,totalEvents,continue_frame_counter,EventTreeU,treeFileU,arrayTest,broken_event_count);
@@ -399,7 +399,7 @@ int main(int argc, char* argv[]) {
     fp.close(); 
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // NOTE: The code is only can proces Evntes 0 and 1, Good for IS690 but need to upgrade for future cases
+    // NOTE: The code is only can process Evntes 0 and 1, Good for IS690 but need to upgrade for future cases
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     std::cout <<"Event0 contados:"<< counterEvent0  << std::endl;
