@@ -1,9 +1,9 @@
-# IEM_Mesytech_Unpacker
+# IEM_Mesytec_Unpacker
 Daniel Fernandez RUiz
 
 ## Introduction 
 
-The IEM_Mesytech_Unpacker is a code developed to translate data stored in the Mesytech Data format to the RootCERN data format.
+The IEM_Mesytec_Unpacker is a code developed to translate data stored in the Mesytec Data format to the RootCERN data format.
 If the code is working correctly the result should be a TTree organized by module number where each branch preserves the name of the model given in the MVME
 The code is meant to minimize the input from the user and be as self-contained as possible.
 The current version still can be upgraded for efficiency and flexibility. I did this unpacker on my free time in the future I would like
@@ -33,7 +33,7 @@ If the user just wants to unpack the data follow these steps:
 3. Chmod +x Run_unpack.sh
 4. ./Run_unpack.sh
 
-And that is it! The code will search for the file in the folder unzip it and extract the Mesytech file with the data to transcribe. In the end, the root file contains a TTree with the data and a series of histograms to compare with the mesytech replay to ensure that all is ok
+And that is it! The code will search for the file in the folder unzip it and extract the Mesytec file with the data to transcribe. In the end, the root file contains a TTree with the data and a series of histograms to compare with the Mesytec replay to ensure that all is ok
 All root files are stored in the Root folder and a root session will be opened automatically
 
 ## For developers/curious people

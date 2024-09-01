@@ -39,11 +39,11 @@ int counterEvent0=0;
 int counterEvent1=0;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The purpose of this code is to unpack a Mesytech list file and present the data in a TTree of ROOT.               //
+// The purpose of this code is to unpack a Mesytec list file and present the data in a TTree of ROOT.               //
 // The code requires a configuration file that specifies the number of events and the modules associated with each   //
 // event.                                                                                                            //
 //                                                                                                                   //
-// Data in Mesytech files is stored in listfile mode: a collection of hex lines grouped in frames. Each frame starts //
+// Data in Mesytec files is stored in listfile mode: a collection of hex lines grouped in frames. Each frame starts //
 // with a header (FX) that summarizes the information of that frame (frames can contain sub-frames). The code reads  //
 // the file frame by frame (F3, F5, and F9 frames are the ones that contain data).                                   //
 //                                                                                                                   //

@@ -6,7 +6,7 @@
 // The methods need to be summoned in the CORRECT OREDER, the Unpacker takes care of this thanks to the config file     //
 // The output is:                                                                                                       //
 //    1-> Root branches containing relevant info that will be sitched to a TTree                                         //
-//    2-> Histograms done with the info of the branches, used to compare with mesytech as a sanity check                //
+//    2-> Histograms done with the info of the branches, used to compare with Mesytec as a sanity check                //
 // DFR                                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
