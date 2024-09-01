@@ -62,7 +62,7 @@ Also, each model needs unique unpacking functions. The code must be flexible eno
 ### How it works
 The code uses sequentially three programs to Unpack
 1. Run_unpack.sh: A simple bash script that searches for the desired file unzips and calls the other two programs.
-2. Interpreter.py: Pyhton scrip used to obtain the module configuration. Information on the module order (and many other things) is stored in the FA modules. This script does a "quick" read of the hex and locates the hex patterns associated with the event declaration and the module starts using a dictionary. The info is transcribed to a configuration script for the unpacker. 
+2. Interpreter.py: Python scrip used to obtain the module configuration. Information on the module order (and many other things) is stored in the FA modules. This script does a "quick" read of the hex and locates the hex patterns associated with the event declaration and the module starts using a dictionary. The info is transcribed to a configuration script for the unpacker. 
 (More info in the script)
 3. Unpack_mvme: Unpacker does a slow read of the file and transcribes to the root. Each module has a custom class with the appropriate transcription methods (src folder) folder.
 All classes inherit from the ModuleFather.h virtual class (include folder)

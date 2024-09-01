@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Daughter class to translate data from a VMMR8 module:                                                                //
 //                                                                                                                      //
-// Inherits strucutre from the ModuleFather.h                                                                           //
-//  Internal mehods desinged for the VMMR8 modules (info: https://www.mesytec.com/products/datasheets/VMMR.pdf page 3)  //                                                                      //                                                                                                                      //
+// Inherits structure from the ModuleFather.h                                                                           //
+//  Internal methods designed for the VMMR8 modules (info: https://www.mesytec.com/products/datasheets/VMMR.pdf page 3)  //                                                                      //                                                                                                                      //
 // The methods need to be summoned in the CORRECT OREDER, the Unpacker takes care of this thanks to the config file     //
 // The output is:                                                                                                       //
-//    1-> Root branches containig relevant info that will be sitched to a TTree                                         //
+//    1-> Root branches containing relevant info that will be sitched to a TTree                                         //
 //    2-> Histograms done with the info of the branches, used to compare with mesytech as a sanity check                //
 // DFR                                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +39,7 @@ int module;
 string nick; 
 string event;
 
-// Declare internal varibales 
+// Declare internal variables 
 Int_t   VMMR8_Multiplicity;
 Int_t   VMMR8_Channel[64];
 ULong_t VMMR_Value[64];
@@ -105,7 +105,7 @@ void readData(ifstream *f) override {
     }
   } // != 0
   
-  // Never eneters here: posible redundant info (need to check)
+  // Never eneters here: possible redundant info (need to check)
   if(vmmr8_data_check == 0b0011){
     unsigned int bus = vmmr8_data[3] & 0b00001111;
     unsigned long value = ( vmmr8_data[0] + (vmmr8_data[1] << 8) ) & 0b1111111111111111;
@@ -128,7 +128,7 @@ void readData(ifstream *f) override {
 
 }
 
-// Method to filter make sure the frame is good (NOTE: I should have though of a better name, chane for final version)
+// Method to filter make sure the frame is good (NOTE: I should have though of a better name, change for final version)
 void read(ifstream *f, Int_t &broken_event_count) override {
   unsigned char block_read_header[4];
   f->read((char*) block_read_header, 4); // should be Type = 0xf5

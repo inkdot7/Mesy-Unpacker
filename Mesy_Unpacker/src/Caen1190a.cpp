@@ -1,11 +1,11 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Daughter class to translate data from a Caen1190 module:                                                                        //
 //                                                                                                                                 //
-// Inherits strucutre from the ModuleFather.h                                                                                      //
-//  Internal methods desinged for the Caen1190 modules                                                                             //                                                                                                                                                                                                    
+// Inherits structure from the ModuleFather.h                                                                                      //
+//  Internal methods designed for the Caen1190 modules                                                                             //                                                                                                                                                                                                    
 // The methods need to be summoned in the CORRECT OREDER, the Unpacker takes care of this thanks to the config file                //
 // The output is:                                                                                                                  //
-//    1-> Root branches containig relevant info that will be sitched to a TTree                                                    //
+//    1-> Root branches containing relevant info that will be sitched to a TTree                                                    //
 //    2-> Histograms done with the info of the branches, used to compare with mesytech as a sanity check                           //
 // DFR                                                                                                                             //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,7 +82,7 @@ void readData(ifstream *f) override {
     }
 
 }
-// Method to filter make sure the frame is good (NOTE: I should have though of a better name, chane for final version)
+// Method to filter make sure the frame is good (NOTE: I should have though of a better name, change for final version)
 void read(ifstream *f, Int_t &broken_event_count) override {
     unsigned char block_read_header[4];
     f->read((char*) block_read_header, 4); // should be Type = 0xf5
