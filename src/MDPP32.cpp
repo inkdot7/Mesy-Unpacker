@@ -125,6 +125,7 @@ void initEvent() override {
 void readData(ifstream *f) override {
 unsigned char mdpp32_scp_data[4];
   f->read((char*) mdpp32_scp_data, 4);
+  printf("XX-MDPP32-DATA: %08x\n", *((uint32_t *) mdpp32_scp_data));
     contadorEntries++;
   unsigned char mdpp32_scp_data_check = (mdpp32_scp_data[3] >> 4) & 0b1111;
    ctr++; 
@@ -175,6 +176,9 @@ void read(ifstream *f, Int_t &broken_event_count) override {
   unsigned char block_read_header[4];
   f->read((char*) block_read_header, 4); // should be Type = 0xf5
   unsigned short module_event_length = (block_read_header[0] + (block_read_header[1] << 8) ) & 0b0001111111111111;
+
+  printf ("XX-MDPP32: %08x\n",
+	  *((uint32_t *) block_read_header));
     
   if (module_event_length > 1) {
     ctr=0;

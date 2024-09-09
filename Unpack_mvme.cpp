@@ -135,6 +135,8 @@ void jumpFrame(ifstream *f, unsigned char frame_header[4],ULong_t &bytes_counter
     f->read(discard, words_length * 4);
   }
   bytes_counter += (words_length * 4);
+
+  printf ("XX-JUMPFRAME: %d\n", words_length);
 }
 
 // Function to decrypt a frame----------------------------------------------------------------------------------------------------------------------------------
@@ -149,9 +151,16 @@ void readFrame(ifstream *f,ULong_t &bytes_counter, Int_t &DATAFRAME_marker, Int_
     unsigned char header[4];
     f->read((char*) header, 4);
     unsigned char frameType = header[3];
+    uint32_t length;
 
     bytes_counter += 4;
-    DATAFRAME_marker = 0;  
+    DATAFRAME_marker = 0;
+
+    length = *((uint32_t *) header) & 0x1fff;
+
+    printf ("XX-READFRAME: (0x%08x) %02x %4d\n",
+	    *((uint32_t *) header), frameType,
+	    length);
 
     
     if(frameType == 0xF9){
@@ -375,6 +384,8 @@ int main(int argc, char* argv[]) {
     fp.read(dontcare , 8);    
     bytes_counter += 8;
 
+    printf ("XX-HEADER: %.8s\n", dontcare);
+
      cout << dontcare<< endl;
     // Use the readFame function to unapck
     arrayTest[0]->EvTree=EventTreeU;
@@ -391,7 +402,7 @@ int main(int argc, char* argv[]) {
     // Write our results
     /////////////////////////////////////////////////////////////////////
     arrayTest[0]->write(broken_event_count);
-    EventTreeU->Print();
+    // EventTreeU->Print();
 
     EventTreeU->Write();
     treeFileU->Write();

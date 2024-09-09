@@ -64,7 +64,7 @@ for file in "${output_files[@]}"; do
 done
 
 # Execute the root command
-root -l$root_command
+# root -l$root_command
 
 
 
